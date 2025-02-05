@@ -1,10 +1,8 @@
 name: Build and Deploy
-
 on:
   push:
     branches:
       - 'beta'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,15 +11,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: List build output
+        run: ls -la dist/analog/public
       - uses: k9n-dev/analog-publish-gh-pages@v1.0.0
         with:
-          # Required: token to access / deploy on GitHub Pages
           access-token: ${{ secrets.ACCESS_TOKEN }}
-          # Optional: arguments passed to `npm ci`
           install-args: ''
-          # Optional: arguments passed to `npm run build`
           build-args: ''
-          # Optional: the directory after build process to deploy (defaults to `dist/analog/public`)
           deploy-dir: 'dist/analog/public'
-          # Optional: a specific branch where the static site should be deployed (defaults to `gh-pages`)
-          deploy-branch: 'gh-pages' # important: --dry-run (see option below) won't actually deploy the site!
+          deploy-branch: 'gh-pages'
