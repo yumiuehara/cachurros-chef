@@ -27,6 +27,7 @@
     "@angular/platform-server": "^19.0.0",
     "@angular/router": "^19.0.0",
     "front-matter": "^4.0.2",
+    "github-markdown-css": "^5.8.1",
     "marked": "^5.0.2",
     "marked-gfm-heading-id": "^3.1.0",
     "marked-highlight": "^2.0.1",
